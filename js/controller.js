@@ -23,6 +23,7 @@ function RequestController(utterance, aliases, action, requestMatcher) {
 }
 
 RequestController.prototype.match = function(requestText) {
-  return this.utterance.toLowerCase() === requestText || 
-    this.aliases.filter(function(e) {return e.toLowerCase() === requestText}).length > 0;
+  var lowerCaseRequestText = requestText.toLowerCase()
+  return this.utterance.toLowerCase() === lowerCaseRequestText || 
+    this.aliases.filter(function(e) {return e.toLowerCase() === lowerCaseRequestText}).length > 0;
 };
