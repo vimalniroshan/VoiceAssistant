@@ -157,6 +157,6 @@ new VoiceRequestHandler([
   });
 ```
 
-Yes. you can combine both RegExp and string in the same list and ``voiceAssistant`` will identify the type and do RegExp match or string to identify the matching ``VoiceRequestHandler``
+You can combine both RegExp and string in the same list and ``voiceAssistant`` will identify the type and do RegExp match or string to identify the matching ``VoiceRequestHandler``
 
 For more examples on these check the example code [exampleVoiceAssistedApp.js]
