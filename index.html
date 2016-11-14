@@ -1,8 +1,12 @@
-
+<!DOCTYPE html>
 <!--
-******************************************************************************
+/*****************************************************************************
 *                                                                            *
 *  Copyright 2016 Vimal Niroshan Sengoden                                    *
+*                                                                            *
+*  www.vimalniroshan.com                                                     *
+*  www.linkedin.com/in/vimalniroshan                                         *
+*  https://github.com/vimalniroshan                                          *
 *                                                                            *
 *  Licensed under the Apache License, Version 2.0 (the "License");           *
 *  you may not use this file except in compliance with the License.          *
@@ -15,7 +19,7 @@
 *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  *
 *  See the License for the specific language governing permissions and       *
 *  limitations under the License.                                            *
-******************************************************************************
+******************************************************************************/
 -->
 
 <!DOCTYPE html>
@@ -24,7 +28,8 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Chrome Audiable App.</title>
+    <meta name="Description" CONTENT="Author: Vimal Niroshan Sengoden, Illustrator: Voice Driven Web Application, Category: Voice or Speech Recognition and Synthesis">
+    <title>Voice Over Web Application</title>
     <link rel="stylesheet" type="text/css" href="includes/css/voice.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.js"></script>
   </head>
@@ -43,9 +48,8 @@
       </div>
     </div>
 
-    <script type="text/javascript" src="includes/js/voiceAssistant.js"></script>
-    <script type="text/javascript" src="includes/js/controller.js"></script>
-    <script type="text/javascript" src="includes/js/utteranceHandler.js"></script>
+    <script type="text/javascript" src="includes/js/VoiceAssistant.js"></script>
+    <script type="text/javascript" src="includes/js/exampleGenericRequestHandler.js"></script>
     <script type="text/javascript">
       $(document).ready(function(){        
         $(window).on('scroll',function() {
@@ -64,6 +68,10 @@
       window.onload = function (){ 
         voiceAssistant.configure(
           {
+            requestHandlers: vocieRequestHandlers,
+            callBackAfterReady: function() {
+                voiceAssistant.say("Hello! Welcome to Vimal's Voice Assistant !");
+            },  
             onListeningStarts: function() {
               console.log("Listening..");
               $(".mic").hide(1000);
@@ -80,7 +88,6 @@
               console.log("Final Speech:" + text);
               $("#interim").hide();
               $("#chat").append($("<p class='triangle-right right color-blue'></p>").text(text));
-              handleRequest(text);
             },
             onListeningStops: function() {
               console.log("Listening stopped.");
@@ -94,18 +101,6 @@
             }
           }
         ); 
-
-        function startVoiceAssistance() {
-          console.log("Trying to start voice assistance!");
-          if(voiceAssistant.isReady()) {
-            voiceAssistant.say("Hello! Thank you for taking the time to fill in this inquiry, How can I assist you?");
-          } else {
-            console.log("VoiceAssistance NOT ready, waiting...");
-            setTimeout(startVoiceAssistance, 2000);
-          }
-        }
-
-        startVoiceAssistance();
       };
       
       function startListening() {

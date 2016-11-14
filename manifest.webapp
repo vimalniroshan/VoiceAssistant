@@ -1,0 +1,9 @@
+"type": "privileged",
+"permissions": {
+  "audio-capture" : {
+    "description" : "Voice Assisted Web Application Demo"
+  },
+  "speech-recognition" : {
+    "description" : "Voice Assisted Web Application Demo"
+  }
+}

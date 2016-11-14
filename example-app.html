@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<!--
+/*****************************************************************************
+*                                                                            *
+*  Copyright 2016 Vimal Niroshan Sengoden                                    *
+*                                                                            *
+*  www.vimalniroshan.com                                                     *
+*  www.linkedin.com/in/vimalniroshan                                         *
+*  https://github.com/vimalniroshan                                          *
+*                                                                            *
+*  Licensed under the Apache License, Version 2.0 (the "License");           *
+*  you may not use this file except in compliance with the License.          *
+*  You may obtain a copy of the License at                                   *
+*                                                                            *
+*    http://www.apache.org/licenses/LICENSE-2.0                              *
+*                                                                            *
+*  Unless required by applicable law or agreed to in writing, software       *
+*  distributed under the License is distributed on an "AS IS" BASIS,         *
+*  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  *
+*  See the License for the specific language governing permissions and       *
+*  limitations under the License.                                            *
+******************************************************************************/
+-->
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="Description" CONTENT="Author: Vimal Niroshan Sengoden, Illustrator: Voice Driven Web Application, Category: Voice or Speech Recognition and Synthesis">
+    <title>Voice Assisted Web Application - Demo</title>
+    <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <style type="text/css">
+    h1{
+        margin: 30px 0;
+        padding: 0 200px 15px 0;
+        border-bottom: 1px solid #E5E5E5;
+    }
+	.bs-example{
+    	margin: 75px 20px;
+    }
+</style>
+  </head>
+  <body>
+    <nav id="myNavbar" class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Voice Assisted Application Demo</a>
+            </div>
+        </div>
+    </nav>
+    <div id="container1" class="container">
+        <div class="bs-example">
+            <form id="nameForm" class="form-horizontal">
+                <div id="nnDiv" class="form-group">
+                    <div class="col-xs-12">
+                        <input type="text" class="form-control" id="nickName" placeholder="Nick Name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-offset-5 col-lg-4">
+                        <input id="name" type="button" class="btn btn-primary" value="Start">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>  
+    <div id="container2" class="container">
+      <div class="bs-example">
+      <ul class="nav nav-tabs">
+        <li class="active"><a id="home" data-toggle="tab" href="#homec">Home</a></li>
+        <li><a id="settings" data-toggle="tab" href="#settingsc">Settings</a></li>
+        <li><a id="contact" data-toggle="tab" href="#contactc">Contact</a></li>
+      </ul>
+      <div class="tab-content">
+        <div id="homec" class="col-xs-offset-1 tab-pane fade in active">
+            <h3>Fill In Your Details</h3>
+            <form id="infoForm" class="form-horizontal">
+                <div id="phDiv" class="form-group">
+                    <label class="control-label col-xs-3" for="phoneNumber">Phone Number:</label>
+                    <div class="col-xs-9">
+                        <input type="tel" class="form-control" id="phoneNumber" placeholder="Phone Number">
+                    </div>
+                </div>
+                <div id="dobDiv" class="form-group">
+                    <label class="control-label col-xs-3">Date of Birth:</label>
+                    <div id="dtDiv" class="col-xs-3">
+                        <select id="date" class="form-control">
+                            <option>Date</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-3">
+                        <select id="month"  class="form-control">
+                            <option>Month</option>
+                            <option value="January">January</option>
+                            <option value="February">February</option>
+                            <option value="March">March</option>
+                            <option value="April">April</option>
+                            <option value="June">June</option>
+                            <option value="July">July</option>
+                            <option value="August">August</option>
+                            <option value="September">September</option>
+                            <option value="October">October</option>
+                            <option value="November">November</option>
+                            <option value="December">December</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-3">
+                        <input id="year" type="year" class="form-control" placeholder="Year">
+                    </div>
+                </div>
+                <div id="aDiv" class="form-group">
+                    <label class="control-label col-xs-3" for="postalAddress">Address:</label>
+                    <div class="col-xs-6">
+                        <textarea rows="2" class="form-control" id="postalAddress" placeholder="Address Line"></textarea>
+                    </div>
+                    <div class="col-xs-3">
+                        <input id="unit" type="number" class="form-control" placeholder="Apt./Unit/Suite">
+                    </div>
+                </div>
+                <div id="cDiv" class="form-group">
+                    <label class="control-label col-xs-3" for="city">City:</label>
+                    <div class="col-xs-9">
+                        <input type="text" class="form-control" id="city" placeholder="City">
+                    </div>
+                </div>
+                <div id="shDiv" class="form-group">
+                    <label class="control-label col-xs-3" for="state">State:</label>
+                    <div class="col-xs-9">
+                        <input type="text" class="form-control" id="state" placeholder="State">
+                    </div>
+                </div>
+                <div id="zDiv" class="form-group">
+                    <label class="control-label col-xs-3" for="ZipCode">Zip Code:</label>
+                    <div class="col-xs-9">
+                        <input type="text" class="form-control" id="zipCode" placeholder="Zip Code">
+                    </div>
+                </div>
+                <div id="gDiv"  class="form-group">
+                    <label class="control-label col-xs-3">Gender:</label>
+                    <div class="col-xs-2">
+                        <label class="radio-inline">
+                            <input id="genderm" type="radio" name="genderRadios" value="male"> Male
+                        </label>
+                    </div>
+                    <div class="col-xs-2">
+                        <label class="radio-inline">
+                            <input id="genderf" type="radio" name="genderRadios" value="female"> Female
+                        </label>
+                    </div>
+                </div>
+                <div id="tDiv" class="form-group">
+                    <div class="col-xs-offset-3 col-xs-9">
+                        <label class="checkbox-inline">
+                            <input id="tnc" type="checkbox" value="agree">  I agree to the <a id="tnclink" href="#" data-toggle="modal" data-target="#termsAndConditions">Terms and Conditions</a>.
+                        </label>
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <div class="col-xs-offset-3 col-xs-9">
+                        <input id="submit" type="submit" class="btn btn-primary" value="Submit">
+                        <input id="reset" type="reset" class="btn btn-default" value="Reset">
+                    </div>
+                </div>
+            </form>
+            <!-- Modal -->
+            <div id="termsAndConditions" class="modal fade" tabindex="-1" role="dialog">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Terms &amp; Conditions</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>
+                        Copyright 2016 Vimal Niroshan Sengoden                 
+                    </p>
+                    <p>
+                        Licensed under the Apache License, Version 2.0 (the "License");         
+                        you may not use this file except in compliance with the License.        
+                        You may obtain a copy of the License at               
+                    </p>                
+                    <p>
+                        http://www.apache.org/licenses/LICENSE-2.0              
+                    </p>
+                    <p>
+                        Unless required by applicable law or agreed to in writing, software     
+                        distributed under the License is distributed on an "AS IS" BASIS,       
+                        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+                        See the License for the specific language governing permissions and     
+                        limitations under the License.   
+                    </p>
+                  </div>
+                  <div class="modal-footer">
+                    <button id="tncClose" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+        </div>
+        <div id="settingsc" class="col-xs-offset-1 tab-pane fade">
+          <h3>Settings</h3>
+          <p>This is settings page to setup voice assistant</p>
+          <div>
+              <form id="voicesForm" class="form-horizontal">
+                <div id="vDiv" class="form-group">
+                    <label class="control-label col-xs-3" for="voices">Voices:</label>
+                    <div class="col-xs-6">
+                        <select id="voices"  class="form-control">
+                            <option>Select a Voice</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-3">
+                        <input id="testVoice" type="button" class="btn btn-default" value="Test Voice">
+                    </div>
+                </div>
+              </form>
+          </div>
+        </div>
+        <div id="contactc" class="col-xs-offset-1 tab-pane fade">
+          <h3>Contact</h3>
+          <p>Email : someemail@somedomain.com</p>
+          <p>Phone : 564-675-4564</p>
+        </div>
+      </div>
+      </div>
+    </div>  
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="includes/js/VoiceAssistant.js"></script>
+    <script type="text/javascript" src="includes/js/exampleVoiceAssistedApp.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+          $("#container2").hide();
+          $("#name").click(function(){
+            if(!$("#nickName").val()) {
+                $("#nnDiv").addClass("has-error");
+                $("#nickName").attr("placeholder", "Enter Nick Name to proceed");
+                voiceAssistant.say("Enter a nick name to proceed");
+            } else {
+                nickName = $("#nickName").val();
+                $("#container1").hide();
+                $("#container2").show();
+                welcomeMessage();
+            }    
+          });
+          
+          $('#voices').on('change', function() {
+            voiceAssistant.setVoiceByName(this.value);
+          });
+          
+          $('#testVoice').click(function(){
+            voiceAssistant.say("The quick brown fox jumps over the lazy dog");   
+          });
+      });
+        
+      window.onload = function (){ 
+        voiceAssistant.configure(
+          {
+            listenContinuously: true,
+            requestHandlers: vocieRequestHandlers,
+            silentOnUnknownRequest: true,
+            callBackAfterReady: function() {
+                voiceAssistant.say("Hello welcome to Vimal's Voice Assisted Web App!");
+                loadVoices();
+            },
+            onListeningStarts: function() {
+              console.log("Listening...");
+            },
+            onInterimResult: function(text) {
+              console.log("Interim Speech:" + text);
+            },
+            onFinalResult: function(text) {
+              console.log("Final Speech:" + text);
+            },
+            onListeningStops: function() {
+              console.log("Listening stopped...");
+            },
+            onSpeechStart: function(text){
+              console.log("Going to speek:" + text);
+            }
+          }
+        ); 
+      };
+    </script>
+  </body>
+</html>
