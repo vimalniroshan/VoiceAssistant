@@ -6,8 +6,6 @@ This work is an experimental work based on draft specification defined in [Web S
 
 ``VoiceAssistant`` combines ``SpeechRecognition`` and ``SpeechSynthesis`` to simplify common Web Application specific usage and act as a controller. ``VoiceAssistant.js`` will work only in Chrome browser v33 and above as [Web Speech APIs](https://dvcs.w3.org/hg/speech-api/raw-file/tip/speechapi.html) ``SpeechRecognition`` and ``SpeechSynthesis`` are currently supported only in Chrome browsers v33 and above.
 
-[![][license img]][license]
-
 ## Getting Started
 ### How add Voice Assistance to your Web Page ?
 Add the ``voiceAssistant.js`` to your web page like any other javascript file and configure ``VoiceAssistant`` specific to current application by invoking  ``voiceAssistant.configure({}/*map of config*/)`` :
