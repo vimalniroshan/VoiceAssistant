@@ -297,7 +297,7 @@ VoiceAssistant.prototype.onUnknowRequest = function () {
 }
 
 VoiceAssistant.prototype.onResult = function (event) {
-    if (typeof(event.results) == 'undefined') {
+    if (typeof(event.results) == "undefined") {
         console.log("undefined results from Speech Recognition");
         return;
     }
