@@ -1,12 +1,10 @@
 # Voice Assistant
 
-<p>Easily build Voice Assisted Web Applications using ``VoiceAssistant.js``. Include ``VoiceAssistant.js`` like any other javascript into your web page and make your applications voice enabled. Voice driven applications are becoming increasingly popular, so as the technologies and standards on those technologies.</p>
+Easily build Voice Assisted Web Applications using ``VoiceAssistant.js``. Include ``VoiceAssistant.js`` like any other javascript into your web page and make your applications voice enabled. Voice driven applications are becoming increasingly popular, so as the technologies and standards on those technologies.
 
-<p>This work is an experimental work based on draft specification defined in [Web Speech API](https://dvcs.w3.org/hg/speech-api/raw-file/tip/speechapi.html) by [W3C](https://www.w3.org/) and Chrome browser support on those specification.</p>
+This work is an experimental work based on draft specification defined in [Web Speech API](https://dvcs.w3.org/hg/speech-api/raw-file/tip/speechapi.html) by [W3C](https://www.w3.org/) and Chrome browser support on those specification.
 
-<p>``VoiceAssistant`` combines ``SpeechRecognition`` and ``SpeechSynthesis`` to simplify common Web Application specific usage and act as a controller. ``VoiceAssistant.js`` will work only in Chrome browser v33 and above as [Web Speech APIs](https://dvcs.w3.org/hg/speech-api/raw-file/tip/speechapi.html) ``SpeechRecognition`` and ``SpeechSynthesis`` are currently supported only in Chrome browsers v33 and above. </p>
-
-[![][license img]][license]
+``VoiceAssistant`` combines ``SpeechRecognition`` and ``SpeechSynthesis`` to simplify common Web Application specific usage and act as a controller. ``VoiceAssistant.js`` will work only in Chrome browser v33 and above as [Web Speech APIs](https://dvcs.w3.org/hg/speech-api/raw-file/tip/speechapi.html) ``SpeechRecognition`` and ``SpeechSynthesis`` are currently supported only in Chrome browsers v33 and above.
 
 ## Getting Started
 ### How add Voice Assistance to your Web Page ?
@@ -159,6 +157,6 @@ new VoiceRequestHandler([
   });
 ```
 
-Yes. you can combine both RegExp and string in the same list and ``voiceAssistant`` will identify the type and do RegExp match or string to identify the matching ``VoiceRequestHandler``
+You can combine both RegExp and string in the same list and ``voiceAssistant`` will identify the type and do RegExp match or string to identify the matching ``VoiceRequestHandler``
 
 For more examples on these check the example code [exampleVoiceAssistedApp.js]
