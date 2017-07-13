@@ -60,9 +60,7 @@ VoiceRequestHandler.prototype.match = function (requestText) {
 };
 
 function VoiceAssistant() {
-    if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
-        alert("No speech recongntion support available in this browser version");
-    } else {
+    if (this.isAvailable()) {
         if (navigator.userAgent.indexOf("Chrome") != -1) {
             this.speechRecognition = new webkitSpeechRecognition();
         } else {
@@ -73,26 +71,29 @@ function VoiceAssistant() {
             this.speechRecognition.lang = LANG;
             this.speechRecognition.continuous = true;
         }
-    }
-
-    if (!('speechSynthesis' in window)) {
-        alert('No Speech Synthesis Support');
-    } else {
         this._speechSynthesisUtterance = new SpeechSynthesisUtterance();
         this._speechSynthesisUtterance.lang = LANG;
         this._speechSynthesisUtterance.rate = SPEECH_RATE;
         this._speechSynthesisUtterance.pitch = SPEECH_PITCH;
 
-        speechSynthesis.getVoices(); //This will start loading all voices
-        speechSynthesis.onvoiceschanged = function () { // Once the voices are loaded, set the voice for this App.
-            voiceAssistantExternalVoicesLoaded = true;
-        };
         this.isReady = false;
         this.silentOnUnknownRequest = false;
         this.utterancesToSpeak = 0;
         this.listenAfterSpeechEnds = true;
         this.stoppedListeningToSpeak = false;
+
+        speechSynthesis.getVoices(); //This will start loading all voices
+        speechSynthesis.onvoiceschanged = function () { // Once the voices are loaded, set the voice for this App.
+            voiceAssistantExternalVoicesLoaded = true;
+        };
     }
+}
+
+VoiceAssistant.prototype.isAvailable = function () {
+    if (!this.hasBrowserSupport) {
+        this.hasBrowserSupport = ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) && ('speechSynthesis' in window)
+    }
+    return this.hasBrowserSupport;
 }
 
 VoiceAssistant.prototype.configure = function (config) {
@@ -106,25 +107,25 @@ VoiceAssistant.prototype.configure = function (config) {
 };
 
 VoiceAssistant.prototype._ready = function () {
-    this.isReady = true;
     if (!this.config) {
-        this.config = { //Default config
-            listenContinuously: false,
-            requestHandlers: [
-                new VoiceRequestHandler([
-                    "Hello",
-                    "Hey",
-                    "How are you"
-                ], function () {
-                    voiceAssistant.say("Hello! Happy to hear from you! how are you?");
-                })
-            ],
-            callBackAfterReady: function () {
-                voiceAssistant.say("Hello! Welcome to Voice Assisted Web Application !");
-            }
+        this.config = { // Default configurations
+            /*listenContinuously: false,
+             requestHandlers: [
+             new VoiceRequestHandler([
+             "Hello",
+             "Hey",
+             "How are you"
+             ], function () {
+             voiceAssistant.say("Hello! Happy to hear from you! how are you?");
+             })
+             ],
+             callBackAfterReady: function () {
+             voiceAssistant.say("Hello! Welcome to Voice Assisted Web Application !");
+             }*/
         };
     }
 
+    this.isReady = true;
     this._configure();
 };
 
@@ -143,11 +144,13 @@ VoiceAssistant.prototype._configure = function () {
         this._speechSynthesisUtterance.pitch = this.config.speechPitch;
     }
 
-    if (!this.config.listenContinuously) {
-        this.speechRecognition.continuous = false;
+    if (this.config.listenContinuously) {
+        this.speechRecognition.continuous = this.config.listenContinuously;
     } else {
-        this.speechRecognition.continuous = true; // defaulting continuous listening
+        this.speechRecognition.continuous = false;
     }
+
+    this.speechRecognition.continuous = true; // needs longer listening
 
     if (this.config.onInterimResult) {
         this.speechRecognition.interimResults = true;
@@ -249,7 +252,7 @@ VoiceAssistant.prototype.say = function (text, dontListenAfterSpeechEnds) {
     var utterances;
 
     if (text.length > MAX_SPEECH_LENGTH_CHARS) {
-        utterances = splitUtterance(text);
+        utterances = this.splitUtterance(text);
     } else {
         utterances = [text];
     }
@@ -260,6 +263,36 @@ VoiceAssistant.prototype.say = function (text, dontListenAfterSpeechEnds) {
         console.log(utterances[i]);
         speechSynthesis.speak(this.createSpeechSynthesisUtterance(utterances[i]));
     }
+};
+
+/**
+ * Experienced problem with speech synthesis in chrome while speaking long statement
+ * Below method is a quick fix to split the utterance string into multiple strings
+ *
+ * TODO: This is quick fix, need to split the utterances properly
+ */
+VoiceAssistant.prototype.splitUtterance = function (utterance) {
+    var i = 0;
+    var start = 0;
+    var utterances = [];
+    while (start < utterance.length) {
+        var tmp = utterance.substr(start, MAX_SPEECH_LENGTH_CHARS);
+        var endIdx = tmp.length;
+
+        if (tmp.length == MAX_SPEECH_LENGTH_CHARS) {
+            var idxOfFullStop = tmp.lastIndexOf(".");
+            var idxOfSpace = tmp.lastIndexOf(" ");
+            endIdx = Math.max(idxOfFullStop, idxOfSpace) + 1;
+        }
+
+        utterances[i] = tmp.substring(0, endIdx);
+
+        console.log("[" + (i) + "] (" + start + ", " + (start + endIdx) + ") " + utterances[i]);
+        start += endIdx;
+        i++;
+    }
+
+    return utterances;
 };
 
 VoiceAssistant.prototype.createSpeechSynthesisUtterance = function (text) {
@@ -297,7 +330,7 @@ VoiceAssistant.prototype.onUnknowRequest = function () {
 }
 
 VoiceAssistant.prototype.onResult = function (event) {
-    if (typeof(event.results) == "undefined") {
+    if (typeof(event.results) == 'undefined') {
         console.log("undefined results from Speech Recognition");
         return;
     }
@@ -338,22 +371,23 @@ VoiceAssistant.prototype.onSpeechStops = function (event) {
 
 voiceAssistant = new VoiceAssistant();
 
-voiceAssistant.speechRecognition.onresult = function (event) {
-    voiceAssistant.onResult(event);
-};
+if (voiceAssistant.isAvailable()) {
+    voiceAssistant.speechRecognition.onresult = function (event) {
+        voiceAssistant.onResult(event);
+    };
 
-voiceAssistant.speechRecognition.onstart = function () {
-    console.log("Listening started");
-};
+    voiceAssistant.speechRecognition.onstart = function () {
+        console.log("Listening started");
+    };
 
-voiceAssistant.speechRecognition.onend = function (event) {
-    voiceAssistant.onListeningStops(event);
-};
+    voiceAssistant.speechRecognition.onend = function (event) {
+        voiceAssistant.onListeningStops(event);
+    };
 
-voiceAssistant._speechSynthesisUtterance.onend = function (event) {
-    voiceAssistant.onSpeechStops(event);
-};
-
+    voiceAssistant._speechSynthesisUtterance.onend = function (event) {
+        voiceAssistant.onSpeechStops(event);
+    };
+}
 
 function checkVoiceLoading() {
     if (navigator.userAgent.indexOf("Chrome") != -1) {
@@ -371,28 +405,6 @@ function checkVoiceLoading() {
     }
 }
 
-function splitUtterance(utterance) {
-    var i = 0;
-    var start = 0;
-    var utterances = [];
-    while (start < utterance.length) {
-        var tmp = utterance.substr(start, MAX_SPEECH_LENGTH_CHARS);
-        var endIdx = tmp.length;
-
-        if (tmp.length == MAX_SPEECH_LENGTH_CHARS) {
-            var idxOfFullStop = tmp.lastIndexOf(".");
-            var idxOfSpace = tmp.lastIndexOf(" ");
-            endIdx = Math.max(idxOfFullStop, idxOfSpace) + 1;
-        }
-
-        utterances[i] = tmp.substring(0, endIdx);
-
-        console.log("[" + (i) + "] (" + start + ", " + (start + endIdx) + ") " + utterances[i]);
-        start += endIdx;
-        i++;
-    }
-
-    return utterances;
+if (voiceAssistant.isAvailable()) {
+    checkVoiceLoading();
 }
-
-checkVoiceLoading();
