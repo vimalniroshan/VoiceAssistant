@@ -109,19 +109,19 @@ VoiceAssistant.prototype.configure = function (config) {
 VoiceAssistant.prototype._ready = function () {
     if (!this.config) {
         this.config = { // Default configurations
-            /*listenContinuously: false,
+             listenContinuously: false,
              requestHandlers: [
-             new VoiceRequestHandler([
-             "Hello",
-             "Hey",
-             "How are you"
-             ], function () {
-             voiceAssistant.say("Hello! Happy to hear from you! how are you?");
-             })
+                 new VoiceRequestHandler([
+                     "Hello",
+                     "Hey",
+                     "How are you"
+                 ], function () {
+                    voiceAssistant.say("Hello! Happy to hear from you! how are you?");
+                 })
              ],
              callBackAfterReady: function () {
-             voiceAssistant.say("Hello! Welcome to Voice Assisted Web Application !");
-             }*/
+                voiceAssistant.say("Hello! Welcome to Voice Assisted Web Application !");
+             }
         };
     }
 
